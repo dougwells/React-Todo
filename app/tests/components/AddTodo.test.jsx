@@ -33,4 +33,19 @@ describe('AddTodo', () => {
     expect(spy).toNotHaveBeenCalled();
   });
 
+  it('should call onAddTodo and add item if conforming todo is entered', () => {
+    var spy = expect.createSpy();
+    var addText = "test";
+    var addTodo = TestUtils.renderIntoDocument(<AddTodo onAddTodo={spy}/>);
+    addTodo.refs.todoText.value = addText;
+    TestUtils.Simulate.submit(addTodo.refs.todoText);
+
+    expect(spy).toHaveBeenCalledWith(addText);
+
+    // var $el = $(ReactDOM.findDOMNode(addTodo));
+    // addTodo.refs.todoText.value = 'test';
+    // TestUtils.Simulate.submit($el.find('form')[0]);
+    // expect(spy).toNotHaveBeenCalled();
+  });
+
 });
