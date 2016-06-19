@@ -10,6 +10,9 @@ var TodoAPI = require('TodoAPI');
 var TodoApp = React.createClass({
 
 getInitialState: function(){
+  if(localStorage.getItem('todos') === null){
+    TodoAPI.setInitialTodos();
+  }
   return {
     showCompleted: false,
     searchText: "",

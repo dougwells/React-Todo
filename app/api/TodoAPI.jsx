@@ -2,6 +2,10 @@ var $ = require('jquery');
 var uuid = require('node-uuid');
 
 module.exports = {
+  setInitialTodos: function(){
+    localStorage.setItem('todos', JSON.stringify(initialTodos));
+  },
+
   setTodos: function(todos){
     if($.isArray(todos)){
       localStorage.setItem('todos', JSON.stringify(todos));
@@ -22,7 +26,7 @@ module.exports = {
   }
 }
 
-var startArr = [
+var initialTodos = [
   {
     id: uuid(),
     text: "Mow lawn",
