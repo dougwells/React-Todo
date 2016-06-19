@@ -5,7 +5,8 @@ var TodoAPI = require('TodoAPI');
 describe('TodoAPI', () => {
     beforeEach(()=>{
       localStorage.removeItem('todos');
-    })
+    });
+
     it('should exist', () => {
       expect(TodoAPI).toExist();
     });
@@ -33,7 +34,23 @@ describe('TodoAPI', () => {
   });
 
   describe('getTodos', ()=>{
+    it('should get valid data if input data is valid', ()=>{
+    var todos = [{
+      id: 23,
+      text: "test",
+      completed: false
+    }];
+    TodoAPI.setTodos(todos);
+    var retrievedTodos = TodoAPI.getTodos();
+    expect(retrievedTodos).toEqual(todos);
+    });
 
+    it('should get empty array/null if invalid data entered', ()=>{
+    var badTodos = {text: "Devcon 5!"};
+    TodoAPI.setTodos(badTodos);
+    var retrievedTodos = TodoAPI.getTodos();
+    expect(retrievedTodos).toEqual([]);
+    });
   });
 
 });
