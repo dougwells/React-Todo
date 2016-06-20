@@ -5,6 +5,7 @@ var $ = require('jQuery');
 var TestUtils = require('react-addons-test-utils');
 
 var TodoApp = require('TodoApp');
+var TodoAPI = require('TodoAPI');
 
 describe('TodoApp', () => {
   it('should exist', () => {
@@ -19,7 +20,7 @@ describe('TodoApp', () => {
     expect(todoApp.state.todos[0].text).toBe(text);
   });
 
-  it('should toggle change value when handleToggle called', () => {
+  it('mark checkbox & change completed status to true', () => {
     var todoData = [{
     		id: 11,
     		text: "Test Features",
