@@ -2,9 +2,11 @@ var $ = require('jquery');
 var uuid = require('node-uuid');
 
 module.exports = {
+
   setInitialTodos: function(){
     localStorage.setItem('todos', JSON.stringify(initialTodos));
   },
+
 
   setTodos: function(todos){
     if($.isArray(todos)){

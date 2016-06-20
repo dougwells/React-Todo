@@ -9,6 +9,7 @@ var TodoAPI = require('TodoAPI');
 
 var TodoApp = React.createClass({
 
+
 getInitialState: function(){
   if(localStorage.getItem('todos') === null){
     TodoAPI.setInitialTodos();
@@ -17,8 +18,8 @@ getInitialState: function(){
     showCompleted: false,
     searchText: "",
     todos: TodoAPI.getTodos()
-  }
-  },
+    }
+},
 
   componentDidUpdate: function(){
     TodoAPI.setTodos(this.state.todos);
@@ -34,11 +35,6 @@ handleAddTodo: function(text){
       }
   ]
 });
-  // var newText = text;
-  // var newId = this.state.todos[this.state.todos.length-1].id+1;
-  // var newTodosArray = this.state.todos;
-  // newTodosArray.push({id:newId, text:newText});
-  // this.setState({todos:newTodosArray});
 },
 
 handleSearch: function(showCompleted, searchText){
