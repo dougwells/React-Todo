@@ -1,5 +1,6 @@
 var $ = require('jquery');
 var uuid = require('node-uuid');
+var moment = require('moment');
 
 module.exports = {
 
@@ -63,21 +64,29 @@ var initialTodos = [
   {
     id: uuid(),
     text: "Mow lawn",
-    completed: false
+    completed: false,
+    createdAt: moment().unix(),
+    completedAt: moment().unix()
   },
   {
     id: uuid(),
     text: "Grocery shop",
-    completed: true
+    completed: true,
+    createdAt: moment().unix(),
+    completedAt: moment().unix()
   },
   {
     id: uuid(),
     text: "Clean up house",
-    completed: false
+    completed: false,
+    createdAt: moment().unix(),
+    completedAt: moment().unix()
   },
   {
     id: uuid(),
     text: "Take out trash",
-    completed: false
+    completed: false,
+    createdAt: moment().unix(),
+    completedAt: moment().unix()
   }
 ];
