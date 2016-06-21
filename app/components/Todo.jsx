@@ -9,16 +9,22 @@ handleToggle: function(){
 
 renderCompleteCheckBox: function(){
   var {completed, id, text, createdAt, completedAt} = this.props;
+  var todoClassName = completed ? "todo todo-completed" : "todo";
   var renderDate = ()=>{
     var message = completed ? "Completed: " : "Created: ";
     var timestamp = completed ? completedAt : createdAt;
     return message + moment.unix(timestamp).format('MMM Do YYYY @ h:mm a')
   }
     return (
-      <div>
-        <input type="checkbox" checked={completed} onChange={this.handleToggle}/>
-        <p>{text}</p>
-        <p>{renderDate()}</p>
+      <div className={todoClassName}>
+        <div>
+          <input type="checkbox" checked={completed} onChange={this.handleToggle}/>
+        </div>
+        <div>
+          <p>{text}</p>
+          <p className="todo__subtext" id="date">{renderDate()}</p>
+        </div>
+
       </div>
     )
 },

@@ -5,16 +5,20 @@ var TodoList = React.createClass({
 render: function(){
   var {todos} = this.props;
   var renderTodos = function(that){
-    return todos.map((todo)=>{
-      return (
-        <Todo key={todo.id} {...todo} onToggle={that.props.onToggle}/>
-      )
-    });
+    if(todos.length>0){
+      return todos.map((todo)=>{
+        return (
+          <Todo key={todo.id} {...todo} onToggle={that.props.onToggle}/>
+        )
+      });
+      } else {
+        return <h6 className="container__message">Enter Your Todos to Get Started Now!</h6>
+      }
+
   };
 
   return(
     <div>
-      <h2>TodoList.jsx</h2>
       {renderTodos(this)}
     </div>
   )
