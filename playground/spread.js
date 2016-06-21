@@ -1,3 +1,5 @@
+console.log(["Doug", "Ted", "Erik"].indexOf("Ted"));
+
 
 var greet = function(name,age){
   console.log("Hello "+name+" you are "+age)

@@ -72,17 +72,26 @@ describe('TodoAPI', () => {
       }
     ];
     it('should display completed todos when show completed is true(checked)', () => {
-      expect(TodoAPI.filterTodos(todos, true, "abc").length).toBe(3);
-      expect(TodoAPI.filterTodos(todos, false, "abc").length).toBe(1);
+      expect(TodoAPI.filterTodos(todos, true, "").length).toBe(3);
+      expect(TodoAPI.filterTodos(todos, false, "").length).toBe(1);
     });
 
     it('should NOT display completed todos when show completed is false (not checked)', () => {
-      expect(TodoAPI.filterTodos(todos, false, "abc").length).toBe(1);
+      expect(TodoAPI.filterTodos(todos, false, "").length).toBe(1);
     });
 
     it('should display completed todos after incomplete ones', () => {
-      expect(TodoAPI.filterTodos(todos, true, "abc")[0].id).toBe(2);
+      expect(TodoAPI.filterTodos(todos, true, "")[0].id).toBe(2);
     });
+
+    it('should find items with search term', () => {
+      expect(TodoAPI.filterTodos(todos, true, "other")[0].id).toBe(2);
+    });
+
+    it('should return all items search term is empty', () => {
+      expect(TodoAPI.filterTodos(todos, true, "").length).toBe(3);
+    });
+
   });
 
 });

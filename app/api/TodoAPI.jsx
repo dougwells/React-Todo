@@ -28,17 +28,23 @@ module.exports = {
   },
 
   filterTodos: function(todos, showCompleted, searchText){
-    var filteredTodos = todos;
 
     //filter by showCompleted
-    filteredTodos = todos.filter((todo)=>{
+    var filteredTodos = todos.filter((todo)=>{
       return (!todo.completed || showCompleted);
     });
 
     //filter by searchText
+    if (searchText.length ===0 || searchText===undefined){
+      filteredTodos = filteredTodos;
+    } else {
+      filteredTodos = filteredTodos.filter((todo)=>{
+        return todo.text.toLowerCase().indexOf(searchText) !== -1
+      });
+    }
 
     //Sort todos w not-completed at top
-    filteredTodos.sort((a,b)=>{
+    filteredTodos = filteredTodos.sort((a,b)=>{
       if(!a.completed && b.completed){
         return -1
       } else if(a.completed && !b.completed){
