@@ -41,7 +41,6 @@ handleAddTodo: function(text){
 },
 
 handleSearch: function(showCompleted, searchText){
-  console.log(searchText);
   this.setState({
     showCompleted: showCompleted,
     searchText: searchText.toLowerCase()
