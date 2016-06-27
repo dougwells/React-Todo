@@ -1,5 +1,13 @@
-// var redux = require('redux');
-// var actions = require('actions');
+var uuid = require('node-uuid');
+var moment = require('moment');
+
+export var searchTextReducer = (state="", action)=>{
+  switch (action.type){
+    case "SET_SEARCH_TEXT":
+      return state = action.searchText;
+    default: return state;
+  };
+};
 
 export var showCompletedReducer = (state=false, action)=>{
   switch (action.type){
@@ -9,13 +17,38 @@ export var showCompletedReducer = (state=false, action)=>{
   };
 };
 
-export var searchTextReducer = (state="", action)=>{
+export var todosReducer = (state=[], action)=>{
   switch (action.type){
-    case "SET_SEARCH_TEXT":
-      return state = action.searchText;
+    case "ADD_TODO":
+      return [
+        ...state, {
+          id: uuid(),
+          text: action.text,
+          completed: false,
+          createdAt: moment().unix(),
+          completedAt: undefined
+        }
+      ];
+
+    case "TOGGLE_TODO":
+      return state.map((todo)=>{
+        if(todo.id === action.id){
+          todo.completed = !todo.completed;
+          if(todo.completed) {
+            todo.completedAt = moment().unix();
+          } else {
+            todo.completedAt = undefined;
+          }
+        //this is within the if statement of todo.id===action.id
+        };
+      });
+
+
     default: return state;
   };
 };
+
+
 
 // var reducer = redux.combineReducers({
 //   showCompleted: showCompletedReducer,
