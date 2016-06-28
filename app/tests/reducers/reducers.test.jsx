@@ -61,9 +61,10 @@ describe('Reducers',()=>{
         id: 2
       };
 
-      var res = reducers.todosReducer(todos,action2);
+      var res = reducers.todosReducer((todos), df(action2));
       expect(res[1].id).toEqual(action2.id);
       expect(res[1].completed).toEqual(true);
+      expect(res[1].completedAt).toNotEqual(undefined);
     });
   });
 

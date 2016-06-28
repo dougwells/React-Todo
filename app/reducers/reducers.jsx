@@ -39,8 +39,8 @@ export var todosReducer = (state=[], action)=>{
           } else {
             todo.completedAt = undefined;
           }
-        //this is within the if statement of todo.id===action.id
         };
+        return todo;
       });
 
 
