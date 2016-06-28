@@ -53,5 +53,5 @@ export var todosReducer = (state=[], action)=>{
 // var reducer = redux.combineReducers({
 //   showCompleted: showCompletedReducer,
 //   searchText: searchTextReducer,
-//   todos: toDosReducer
+//   todos: todosReducer
 // });
