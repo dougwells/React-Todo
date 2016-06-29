@@ -3,7 +3,7 @@ var moment = require('moment');
 var {connect} = require('react-redux');
 var actions = require('actions');
 
-var Todo = React.createClass({
+export var Todo = React.createClass({
 
 handleToggle: function(){
   // this.props.onToggle(this.props.id);
@@ -43,4 +43,4 @@ render: function(){
 
 });
 
-module.exports = connect()(Todo);
+export default connect()(Todo);

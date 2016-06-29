@@ -1,8 +1,9 @@
 var React = require('react');
 var {connect} = require('react-redux');
-var Todo = require('Todo');
+// var Todo = require('Todo');  --> want the connected Todo which is the default export
+import Todo from 'Todo';
 
-var TodoList = React.createClass({
+export var TodoList = React.createClass({
 render: function(){
   var {todos} = this.props;
   var renderTodos = function(that){
@@ -28,7 +29,7 @@ render: function(){
 });
 
 //connect sets properties on prop
-module.exports = connect(
+export default connect(
   (state)=>{
     return {
       todos: state.todos
