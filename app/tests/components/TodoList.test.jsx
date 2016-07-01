@@ -41,7 +41,7 @@ describe('TodoList', () => {
     var todos = [];
     var todoList = TestUtils.renderIntoDocument(<TodoList todos={todos}/>);
     var $el = $(ReactDOM.findDOMNode(todoList));
-    expect($el.find('h6').length).toBe(1);
+    expect($el.find('p').length).toBe(1);
   });
 
 });

@@ -34,7 +34,7 @@ describe('TodoSearch', () => {
     todoSearch.refs.showCompleted.checked = false;
     TestUtils.Simulate.change(todoSearch.refs.showCompleted);
 
-    expect(spy).toHaveBeenCalledWith(action);
+    expect(spy).toHaveBeenCalled();
   });
 
 });

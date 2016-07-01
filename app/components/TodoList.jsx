@@ -7,7 +7,6 @@ var TodoAPI = require('TodoAPI');
 export var TodoList = React.createClass({
 render: function(){
   var {todos, showCompleted, searchText} = this.props;
-  console.dir(todos)
   var renderTodos = ()=>{
     if(todos.length === 0) {
       return (
@@ -26,7 +25,7 @@ render: function(){
 
   return(
     <div>
-      {renderTodos(this)}
+      {renderTodos()}
     </div>
   )
 }
