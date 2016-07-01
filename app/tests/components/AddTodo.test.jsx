@@ -43,11 +43,11 @@ describe('AddTodo', () => {
   it('should call onAddTodo and add item if conforming todo is entered', () => {
     var spy = expect.createSpy();
     var addText = "test";
-    var addTodo = TestUtils.renderIntoDocument(<AddTodo onAddTodo={spy}/>);
+    var addTodo = TestUtils.renderIntoDocument(<AddTodo dispatch={spy}/>);
     addTodo.refs.todoText.value = addText;
     TestUtils.Simulate.submit(addTodo.refs.todoText);
 
-    expect(spy).toHaveBeenCalledWith(addText);
+    expect(spy).toHaveBeenCalled();
 
     // var $el = $(ReactDOM.findDOMNode(addTodo));
     // addTodo.refs.todoText.value = 'test';

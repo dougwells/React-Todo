@@ -12,9 +12,6 @@ store.subscribe(()=>{
   console.log('New state: ', store.getState());
 });
 
-store.dispatch(actions.toggleShowCompleted());
-store.dispatch(actions.addTodo("Send care package to Savannah"));
-store.dispatch(actions.setSearchText("Savannah"));
 
 // Load foundation
 $(document).foundation();
