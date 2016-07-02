@@ -9,10 +9,14 @@ var TodoAPI = require('TodoAPI');
 var actions = require('actions');
 var store = require('configureStore').configure();
 
+//Connect to firebase
+import './../playground/firebase/index';
+
 store.subscribe(()=>{
   var state = store.getState();
   console.log('New state: ', store.getState());
-  TodoAPI.setTodos(state.todos)
+  TodoAPI.setTodos(state.todos);
+  // state.todos.length === 0 ? TodoAPI.setInitialTodos() : TodoAPI.setTodos(state.todos);
 });
 
 var initialTodos = TodoAPI.getTodos();

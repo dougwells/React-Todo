@@ -22,7 +22,7 @@ module.exports = {
     try {
       var todos = JSON.parse(stringTodos);
     } catch(err) {
-      console.log("Error: getTodos could not updating todos", err);
+      console.log("Error: TodoAPI.getTodos could not update todos", err);
     }
 
     return $.isArray(todos) ? todos : [];
