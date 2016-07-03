@@ -2,6 +2,7 @@ var expect = require('expect');
 var df = require('deep-freeze-strict');
 
 var reducers = require('reducers');
+var actions = require('actions');
 
 describe('Reducers',()=>{
   describe('SearchTextReducer', ()=>{
@@ -28,14 +29,18 @@ describe('Reducers',()=>{
   describe('addTodoReducer', ()=>{
     var action1 = {
       type: 'ADD_TODO',
-      text: 'Mow lawn'
+      todo: {
+        id:123,
+        text: "Debug code",
+        completed: false,
+        createdAt: 100
+      }
     };
 
     it("should add new todo text when Add button clicked", ()=> {
-
       var res = reducers.todosReducer([],action1);
       expect(res.length).toEqual(1);
-      expect(res[0].text).toEqual(action1.text);
+      expect(res[0]).toEqual(action1.todo);
     });
 
     it("should toggle completed & add completedAt if appropriate", ()=> {
