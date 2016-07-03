@@ -23,28 +23,22 @@ firebaseRef.set({
 }
 });
 
-// firebaseRef.child('user').once('value').then(
-//   (snapshot)=> {console.log('FB Data Retrieved', snapshot.val())},
-//   (err)=> {console.log("Error retrieiving FB data.  Error: ", err)}
-// );
+var todosRef = firebaseRef.child('todos');
 
-firebaseRef.child('user').on('value', (snapshot)=>{
-  console.log('We Have Your Data: ', snapshot.val());
+todosRef.on('child_added', (snapshot)=>{
+  console.log('Child added.', snapshot.key, snapshot.val());
 });
-firebaseRef.update({'user/name': 'Erik'});
-firebaseRef.update({'app/name': 'Modern Todo App'});
-// firebaseRef.off();
 
+todosRef.on('child_changed', (snapshot)=>{
+  console.log('Child changed.', snapshot.key, snapshot.val());
+});
 
-// firebaseRef.update({
-//   "app/name": "Todo App with React-Redux-Firebase ",
-//   "user/name" : "Erik"
-// });
+todosRef.on('child_removed', (snapshot)=>{
+  console.log('Child removed.', snapshot.key, snapshot.val());
+});
 
-// firebaseRef.child('app').update({name: 'Todo App'});
-// firebaseRef.off();
-// firebaseRef.child('user').update({name:'Erk', isOld: true});
+var newTodo1 = todosRef.push().set({text: "Grill burgers"});
+var newTodo2 = todosRef.push().set({text: "Make salad"});
 
-// firebaseRef.child('app').update({name: null, version: '2.0.0'});
-// firebaseRef.child('user').update({age: null});
-// firebaseRef.child('developer').remove();
+console.log("Todo1 id: ", newTodo1.key);
+console.log("Todo2 id: ", newTodo2.key);

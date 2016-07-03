@@ -11,7 +11,7 @@ handleSubmit: function(event){
   if(newTodo.length>0){
     this.refs.todoText.value = '';
     // this.props.onAddTodo(newTodo);
-    dispatch(actions.addTodo(newTodo));
+    dispatch(actions.startAddTodo(newTodo));
   }else{
     this.refs.todoText.focus();
   }
