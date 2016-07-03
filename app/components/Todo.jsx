@@ -21,7 +21,7 @@ renderCompleteCheckBox: function(){
       <div className={todoClassName}>
         <div>
           <input type="checkbox" checked={completed} onChange={()=>{
-              dispatch(actions.toggleTodo(id));
+              dispatch(actions.startToggleTodo(id, !completed));
             }}/>
         </div>
         <div>
