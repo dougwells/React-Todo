@@ -28,13 +28,20 @@ export var startAddTodos = () => {
     var todosRef = firebaseRef.child('todos').once('value');
     return todosRef.then(
       (snapshot) => {
-        console.log("snapshot", initialTodos, snapshot.val())
-        return dispatch(addTodos(initialTodos));
-      }
-    )
-  }
+        var todos = snapshot.val() || {};
+        var parsedTodos = [];
 
-};
+        Object.keys(todos).forEach((todoId)=>{
+          parsedTodos.push({
+            id: todoId,
+            ...todos[todoId]
+          });
+        });
+        return dispatch(addTodos(parsedTodos));
+      })
+
+      }
+  };
 
 export var startAddTodo = (text)=>{
   return (dispatch, getState)=>{
