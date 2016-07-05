@@ -2,6 +2,7 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 var expect = require('expect');
 
+import firebase, {firebaseRef} from 'app/firebase/';
 var actions = require('actions');
 
 var createMockStore = configureMockStore([thunk]);
@@ -54,6 +55,54 @@ describe('Actions', ()=>{
     ).catch(done);
   });
 
+  it('should generate updateTodo action', ()=>{
+    var action = {
+      type: "UPDATE_TODO",
+      id: 2,
+      updates: {completed: false}
+    };
+    var res = actions.updateTodo(action.id, action.updates);
+    expect(action).toEqual(res);
+  });
+
+  describe('Tests with Firebase todos', ()=>{
+    var testTodoRef;
+
+    beforeEach(()=>{
+      testTodoRef = firebaseRef.child('todo').push();
+      testTodoRef.set({
+        text: 'Something to do',
+        completed: false,
+        createdAt: 125
+      }).then(()=> done())  //single line fn so no { } needed
+    });
+    afterEach(()=>{
+      testTodoRef.remove().then(()=>done());
+    });
+
+    it('should toggle todo and dispatch UPDATE_TODO action', (done)=>{
+      const store = createMockStore({});
+      const action = actions.startToggleTodo(testTodoRef.key, true)
+      store.dispatch(action).then(()=>{
+        const mockActions = store.getActions();
+
+        expect(mockActions[0]).toInclude({
+          type: 'UPDATE_TODOS',
+          id: testTodoRef.key
+        });
+
+        expect(mockActions[0].updates).toInclude({
+          completed: true
+        });
+
+        expect(mockActions[0].updates.completed).toExist();
+        done();
+
+      }, done())
+    });
+  });
+});
+
   // it('should generate add todos action object', ()=>{
   //   var todos = [{
   //     id: '111',
@@ -86,15 +135,3 @@ describe('Actions', ()=>{
 //
 //   expect(res).toEqual(action);
 // });
-
-  it('should generate updateTodo action', ()=>{
-    var action = {
-      type: "UPDATE_TODO",
-      id: 2,
-      updates: {completed: false}
-    };
-    var res = actions.updateTodo(action.id, action.updates);
-    expect(action).toEqual(res);
-  });
-
-});
