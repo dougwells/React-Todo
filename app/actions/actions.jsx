@@ -1,6 +1,7 @@
 import moment from 'moment';
 
 import firebase, {firebaseRef} from 'app/firebase/index';
+var initialTodos = require('TodoAPI').initialTodos;
 
 export var setSearchText = (searchText) => {
   return {
@@ -20,6 +21,19 @@ export var addTodo = (todo) => {
     type: 'ADD_TODO',
     todo
   }
+};
+
+export var startAddTodos = () => {
+  return (dispatch, getState) =>{
+    var todosRef = firebaseRef.child('todos').once('value');
+    return todosRef.then(
+      (snapshot) => {
+        console.log("snapshot", initialTodos, snapshot.val())
+        return dispatch(addTodos(initialTodos));
+      }
+    )
+  }
+
 };
 
 export var startAddTodo = (text)=>{

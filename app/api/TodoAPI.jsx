@@ -4,30 +4,6 @@ var moment = require('moment');
 
 module.exports = {
 
-  setInitialTodos: function(){
-    localStorage.setItem('todos', JSON.stringify(initialTodos));
-  },
-
-
-  setTodos: function(todos){
-    if($.isArray(todos)){
-      localStorage.setItem('todos', JSON.stringify(todos));
-      return(todos);
-    }
-  },
-
-  getTodos: function(){
-    var stringTodos = localStorage.getItem('todos');
-    var todos = [];
-    try {
-      var todos = JSON.parse(stringTodos);
-    } catch(err) {
-      console.log("Error: TodoAPI.getTodos could not update todos", err);
-    }
-
-    return $.isArray(todos) ? todos : [];
-  },
-
   filterTodos: function(todos, showCompleted, searchText){
 
     //filter by showCompleted
@@ -57,36 +33,36 @@ module.exports = {
 
     return filteredTodos;
 
-  }
-}
+  },
 
-var initialTodos = [
-  {
-    id: uuid(),
-    text: "Mow lawn",
-    completed: false,
-    createdAt: moment().unix(),
-    completedAt: moment().unix()
-  },
-  {
-    id: uuid(),
-    text: "Grocery shop",
-    completed: true,
-    createdAt: moment().unix(),
-    completedAt: moment().unix()
-  },
-  {
-    id: uuid(),
-    text: "Clean up house",
-    completed: false,
-    createdAt: moment().unix(),
-    completedAt: moment().unix()
-  },
-  {
-    id: uuid(),
-    text: "Take out trash",
-    completed: false,
-    createdAt: moment().unix(),
-    completedAt: moment().unix()
-  }
-];
+  initialTodos: [
+    // {
+    //   id: uuid(),
+    //   text: "Mow lawn",
+    //   completed: false,
+    //   createdAt: moment().unix(),
+    //   completedAt: moment().unix()
+    // },
+    // {
+    //   id: uuid(),
+    //   text: "Grocery shop",
+    //   completed: true,
+    //   createdAt: moment().unix(),
+    //   completedAt: moment().unix()
+    // },
+    // {
+    //   id: uuid(),
+    //   text: "Clean up house",
+    //   completed: false,
+    //   createdAt: moment().unix(),
+    //   completedAt: moment().unix()
+    // },
+    // {
+    //   id: uuid(),
+    //   text: "Take out trash",
+    //   completed: false,
+    //   createdAt: moment().unix(),
+    //   completedAt: moment().unix()
+    // }
+  ]
+}
