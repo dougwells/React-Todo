@@ -10,8 +10,6 @@ render: function(){
   var displayArr = TodoAPI.filterTodos(todos, showCompleted, searchText);
 
   var renderTodos = ()=>{
-    console.log(!showCompleted && displayArr ===0)
-    console.log("todos & display Arrays", todos, displayArr);
     if(displayArr.length ===0) {
       return (
         <p className="container__message">Enter Your Todos to Get Started Now!</p>
