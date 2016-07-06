@@ -1,13 +1,13 @@
 import firebase from 'firebase';
-var todoSecrets = require('./../../secrets');
 
 try{
   var config = {
-    apiKey: todoSecrets.apiKeyFirebase,
-    authDomain: "react-todo-app-udemy-mead.firebaseapp.com",
-    databaseURL: "https://react-todo-app-udemy-mead.firebaseio.com",
-    storageBucket: "react-todo-app-udemy-mead.appspot.com",
+    apiKey: process.env.API_KEY,
+    authDomain: process.env.AUTH_DOMAIN,
+    databaseURL: process.env.DATABASE_URL,
+    storageBucket: process.env.STORAGE_BUCKET,
   };
+  console.log(config.apiKey, config.authDomain, config.databaseURL, config.storageBucket);
   firebase.initializeApp(config);
 } catch (err){
 
