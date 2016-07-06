@@ -38,6 +38,10 @@ export var startAddTodos = () => {
           });
         });
         return dispatch(addTodos(parsedTodos));
+        
+        //OR ... return seeded Todos
+        // return dispatch(addTodos(initialTodos));
+
       })
 
       }

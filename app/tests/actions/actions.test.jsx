@@ -68,17 +68,46 @@ describe('Actions', ()=>{
   describe('Tests with Firebase todos', ()=>{
     var testTodoRef;
 
-    beforeEach(()=>{
-      testTodoRef = firebaseRef.child('todo').push();
-      testTodoRef.set({
-        text: 'Something to do',
-        completed: false,
-        createdAt: 125
-      }).then(()=> done())  //single line fn so no { } needed
+    beforeEach((done)=>{
+      var todosRef = firebaseRef.child('todos');
+      todosRef.remove().then(()=>{
+        testTodoRef = firebaseRef.child('todos').push();
+        return testTodoRef.set({
+          text: 'Something to do',
+          completed: false,
+          createdAt: 125
+        })
+      })
+      .then(()=> done())
+      .catch(done);
+
     });
-    afterEach(()=>{
+    afterEach((done)=>{
       testTodoRef.remove().then(()=>done());
     });
+
+// Start FB startAddTodos Test
+    it('should load initial FB database (1 todo per beforeTest above) when call startAddTodos()', (done)=>{
+      const store = createMockStore({});
+      const action = actions.startAddTodos()
+
+      store.dispatch(action).then(()=>{
+        const mockActions = store.getActions();
+
+        expect(mockActions[0]).toInclude({
+          type: 'ADD_TODOS'
+        });
+
+        expect(mockActions[0].todos.length).toBe(1);
+
+        expect(mockActions[0].todos).toInclude({
+          text: 'Something to do'
+        });
+        done();
+
+      }, done())
+    });
+// End FB addTodo Test
 
     it('should toggle todo and dispatch UPDATE_TODO action', (done)=>{
       const store = createMockStore({});
