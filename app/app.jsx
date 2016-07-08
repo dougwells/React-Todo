@@ -5,6 +5,8 @@ var {Route, Router, IndexRoute, hashHistory} = require('react-router');
 
 var TodoApp = require('TodoApp');
 var TodoAPI = require('TodoAPI');
+var Main = require('Main');
+var Login = require('Login');
 
 var actions = require('actions');
 var store = require('configureStore').configure();
@@ -20,7 +22,10 @@ require('style!css!sass!applicationStyles')
 
 ReactDOM.render(
   <Provider store = {store}>
-    <TodoApp/>
+    <Router history={hashHistory}>
+      <Route path="/" component={Main}/>
+      <Route path="todos" component={TodoApp}/>
+    </Router>
   </Provider>,
   document.getElementById('app')
 );
