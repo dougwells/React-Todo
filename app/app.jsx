@@ -7,9 +7,19 @@ var TodoApp = require('TodoApp');
 var TodoAPI = require('TodoAPI');
 var Main = require('Main');
 var Login = require('Login');
+import firebase from '/app/firebase/';
 
 var actions = require('actions');
 var store = require('configureStore').configure();
+
+firebase.auth().onAuthStateChange((user)=>{
+	if(user){
+		hashHistory.push('/todos');
+	}else{
+		hashHistory.push("/");
+	}
+
+});
 
 store.dispatch(actions.startAddTodos());
 
@@ -23,8 +33,10 @@ require('style!css!sass!applicationStyles')
 ReactDOM.render(
   <Provider store = {store}>
     <Router history={hashHistory}>
-      <Route path="/" component={Main}/>
-      <Route path="todos" component={TodoApp}/>
+      <Route path="/">
+      	<Route path="todos" component={TodoApp}/>
+      	<Route path="/" component={Login}/>
+      </Route>
     </Router>
   </Provider>,
   document.getElementById('app')
