@@ -6,20 +6,20 @@ var {Route, Router, IndexRoute, hashHistory} = require('react-router');
 var TodoApp = require('TodoApp');
 var TodoAPI = require('TodoAPI');
 var Main = require('Main');
-var Login = require('Login');
-import firebase from '/app/firebase/';
+import Login from 'Login';
+import firebase from 'firebase';
 
 var actions = require('actions');
 var store = require('configureStore').configure();
 
-firebase.auth().onAuthStateChange((user)=>{
-	if(user){
-		hashHistory.push('/todos');
-	}else{
-		hashHistory.push("/");
-	}
-
-});
+// firebase.auth().onAuthStateChange((user)=>{
+// 	if(user){
+// 		hashHistory.push('/todos');
+// 	}else{
+// 		hashHistory.push("/");
+// 	}
+//
+// });
 
 store.dispatch(actions.startAddTodos());
 
@@ -35,7 +35,7 @@ ReactDOM.render(
     <Router history={hashHistory}>
       <Route path="/">
       	<Route path="todos" component={TodoApp}/>
-      	<Route path="/" component={Login}/>
+      	<IndexRoute component={Login}/>
       </Route>
     </Router>
   </Provider>,
