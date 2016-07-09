@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-import firebase, {firebaseRef} from 'app/firebase/index';
+import firebase, {firebaseRef, githubProvider} from 'app/firebase/index';
 var initialTodos = require('TodoAPI').initialTodos;
 
 export var setSearchText = (searchText) => {
@@ -38,7 +38,7 @@ export var startAddTodos = () => {
           });
         });
         return dispatch(addTodos(parsedTodos));
-        
+
         //OR ... return seeded Todos
         // return dispatch(addTodos(initialTodos));
 
@@ -94,4 +94,22 @@ export var startToggleTodo = (id, completed) => {
       ()=>{dispatch(updateTodo(id, updates));}
     )
   }
-}
+};
+
+export var startLogin = ()=>{
+  return (dispatch, getState)=>{
+    return firebase.auth().signInWithPopup(githubProvider).then(
+      (result)=>{console.log('Auth worked! ', result) },
+      (e)=>{console.log("Unable to auth. ",e);}
+    );
+  };
+};
+
+export var startLogout = ()=>{
+  return (dispatch, getState)=>{
+    return firebase.auth.signOut().then(
+    ()=>{
+      console.log("Logout")
+    });
+  };
+};
