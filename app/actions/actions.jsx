@@ -113,3 +113,18 @@ export var startLogout = ()=>{
     });
   };
 };
+
+export var login = (uid) => {
+  console.log('Logging in ...', uid)
+  return {
+    type: 'LOGIN',
+    uid
+  };
+};
+
+export var logout = () => {
+  console.log('Logging out ...')
+  return {
+    type: 'LOGOUT'
+  };
+};

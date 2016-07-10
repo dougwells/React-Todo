@@ -17,6 +17,7 @@ export var TodoApp = React.createClass({
     e.preventDefault();
     var dispatch = this.props.dispatch;
     dispatch(actions.startLogout());
+    dispatch(actions.logout());
   },
 
   render: function(){

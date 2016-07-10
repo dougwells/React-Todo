@@ -44,6 +44,23 @@ export var todosReducer = (state=[], action)=>{
   };
 };
 
+export var authReducer = (state={}, action)=>{
+  switch (action.type){
+    case "LOGIN":
+      console.log('login', action.uid);
+      return {
+        uid: action.uid
+      };
+
+    case "LOGOUT":
+    console.log ('logout from authReducer');
+    return {
+      uid: ""
+    };
+    default: return state;
+  };
+};
+
 
 
 // var reducer = redux.combineReducers({
