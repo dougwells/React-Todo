@@ -3,10 +3,10 @@ var ReactDOM = require('react-dom');
 var {Provider} = require('react-redux');
 var {Route, Router, IndexRoute, hashHistory} = require('react-router');
 
-var TodoApp = require('TodoApp');
 var TodoAPI = require('TodoAPI');
 var Main = require('Main');
 import Login from 'Login';
+import TodoApp from 'TodoApp';
 import firebase from 'firebase';
 
 var actions = require('actions');
