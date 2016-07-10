@@ -5,9 +5,8 @@ import * as actions from 'actions';
 export var Login = React.createClass({
 
   onLogin (){
-    console.dir(this.props.dispatch)
-    // var {dispatch} = this.props
-    // dispatch(actions.startLogin());
+    var {dispatch} = this.props
+    dispatch(actions.startLogin());
   },
 
   render () {
