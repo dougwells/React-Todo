@@ -39,19 +39,7 @@ describe('Actions', ()=>{
     expect(res).toEqual(action);
   });
 
-  it('startAddTodo should generate addTodo object and dispatch ADD_TODO', (done)=>{
-    const store = createMockStore({});
-    const todoText = "My todo item";
 
-    store.dispatch(actions.startAddTodo(todoText)).then(
-      ()=>{
-        const actions = store.getActions();
-        expect(actions[0]).toInclude({type: "ADD_TODO"});
-        expect(actions[0].todo.text).toEqual(todoText);
-        done();
-      }
-    ).catch(done);
-  });
 
   it('should generate updateTodo action', ()=>{
     var action = {
@@ -65,11 +53,17 @@ describe('Actions', ()=>{
 
   describe('Tests with Firebase todos', ()=>{
     var testTodoRef;
+    var uid;
+    var todosRef;
 
     beforeEach((done)=>{
-      var todosRef = firebaseRef.child('todos');
-      todosRef.remove().then(()=>{
-        testTodoRef = firebaseRef.child('todos').push();
+      var credential = firebase.auth.GithubAuthProvider.credential(process.env.GITHUB_ACCESS_TOKEN);
+      firebase.auth().signInWithCredential(credential).then((user)=>{
+        uid = user.uid;
+        todosRef = firebaseRef.child(`users/${uid}/todos`);
+        return todosRef.remove()
+      }).then(()=>{
+        testTodoRef = todosRef.push();
         return testTodoRef.set({
           text: 'Something to do',
           completed: false,
@@ -81,12 +75,12 @@ describe('Actions', ()=>{
 
     });
     afterEach((done)=>{
-      testTodoRef.remove().then(()=>done());
+      todosRef.remove().then(()=>done());
     });
 
 // Start FB startAddTodos Test
     it('should load initial FB database (1 todo per beforeTest above) when call startAddTodos()', (done)=>{
-      const store = createMockStore({});
+      const store = createMockStore({auth: {uid: uid}});
       const action = actions.startAddTodos()
 
       store.dispatch(action).then(()=>{
@@ -105,10 +99,24 @@ describe('Actions', ()=>{
 
       }, done())
     });
+
+    it('startAddTodo should generate addTodo object and dispatch ADD_TODO', (done)=>{
+      const store = createMockStore({auth: {uid: uid}});
+      const todoText = "My todo item";
+
+      store.dispatch(actions.startAddTodo(todoText)).then(
+        ()=>{
+          const actions = store.getActions();
+          expect(actions[0]).toInclude({type: "ADD_TODO"});
+          expect(actions[0].todo.text).toEqual(todoText);
+          done();
+        }
+      ).catch(done);
+    });
 // End FB addTodo Test
 
     it('should toggle todo and dispatch UPDATE_TODO action', (done)=>{
-      const store = createMockStore({});
+      const store = createMockStore({auth: {uid: uid}});
       const action = actions.startToggleTodo(testTodoRef.key, true);
       store.dispatch(action).then(()=>{
         const mockActions = store.getActions();
@@ -138,7 +146,7 @@ describe('Actions', ()=>{
     });
 
     it('logout should generate logout action', (done)=>{
-      const store = createMockStore({});
+      const store = createMockStore({auth: {uid: uid}});
       const action = actions.logout();
       store.dispatch(action).then(()=>{
         const mockActions = store.getActions();
@@ -146,9 +154,8 @@ describe('Actions', ()=>{
         expect(mockActions[0]).toInclude({uid: ""});
         done();
       }, done())
-
-
     });
+
 
 
   });
