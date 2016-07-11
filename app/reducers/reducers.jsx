@@ -60,11 +60,3 @@ export var authReducer = (state={}, action)=>{
     default: return state;
   };
 };
-
-
-
-// var reducer = redux.combineReducers({
-//   showCompleted: showCompletedReducer,
-//   searchText: searchTextReducer,
-//   todos: todosReducer
-// });

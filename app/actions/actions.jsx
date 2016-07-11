@@ -100,7 +100,7 @@ export var startLogin = ()=>{
   return (dispatch, getState)=>{
     return firebase.auth().signInWithPopup(githubProvider).then(
       (result)=>{
-        dispatch(login(result.user.uid));
+        // dispatch(login(result.user.uid));
       },
       (e)=>{console.log("Unable to auth. ",e);}
     );
@@ -111,8 +111,7 @@ export var startLogout = ()=>{
   return (dispatch, getState)=>{
     return firebase.auth().signOut().then(
     ()=>{
-      dispatch(logout());
-
+      // dispatch(logout());
     });
   };
 };
