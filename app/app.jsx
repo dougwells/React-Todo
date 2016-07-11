@@ -10,6 +10,10 @@ import router from 'app/router/index';
 var actions = require('actions');
 var store = require('configureStore').configure();
 
+store.subscribe(()=>{
+  console.log('New state: ', store.getState());
+});
+
 firebase.auth().onAuthStateChanged((user)=>{
 	if(user){
 		hashHistory.push('/todos');

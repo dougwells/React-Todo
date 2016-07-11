@@ -39,7 +39,7 @@ describe('TodoList', () => {
 
   it('should render encouraging message when no todos', ()=>{
     var todos = [];
-    var todoList = TestUtils.renderIntoDocument(<TodoList todos={todos}/>);
+    var todoList = TestUtils.renderIntoDocument(<TodoList todos={todos} showCompleted="true" searchText=""/>);
     var $el = $(ReactDOM.findDOMNode(todoList));
     expect($el.find('p').length).toBe(1);
   });

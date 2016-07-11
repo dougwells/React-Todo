@@ -26,8 +26,6 @@ describe('Actions', ()=>{
   });
 
   it('addTodo should generate addTodo action', ()=>{
-    // var newTodo = actions.addTodo("Mow Lawn");
-    // expect(newTodo.text).toBe("Mow Lawn");
     var action = {
       type: 'ADD_TODO',
       todo: {
@@ -111,7 +109,7 @@ describe('Actions', ()=>{
 
     it('should toggle todo and dispatch UPDATE_TODO action', (done)=>{
       const store = createMockStore({});
-      const action = actions.startToggleTodo(testTodoRef.key, true)
+      const action = actions.startToggleTodo(testTodoRef.key, true);
       store.dispatch(action).then(()=>{
         const mockActions = store.getActions();
 
@@ -129,38 +127,29 @@ describe('Actions', ()=>{
 
       }, done())
     });
+
+    it('login should generate login action', ()=>{
+      var action = {
+        type: 'LOGIN',
+        uid: 123
+      };
+      var res = actions.login(action.uid);
+      expect(res).toEqual(action);
+    });
+
+    it('logout should generate logout action', (done)=>{
+      const store = createMockStore({});
+      const action = actions.logout();
+      store.dispatch(action).then(()=>{
+        const mockActions = store.getActions();
+
+        expect(mockActions[0]).toInclude({uid: ""});
+        done();
+      }, done())
+
+
+    });
+
+
   });
 });
-
-  // it('should generate add todos action object', ()=>{
-  //   var todos = [{
-  //     id: '111',
-  //     text: 'anything',
-  //     completed: false,
-  //     completedAt: undefined,
-  //     createdAt: 33000
-  //   }];
-  //   var action = {
-  //     type: 'ADD_TODOS',
-  //     todos
-  //   };
-  //   var res = actions.startAddTodo(todos[0].text)(todos[0]);
-  //   expect(res.text).toEqual(action.todos[0].text);
-  // });
-
-//   it('should generate add todos action object', () => {
-//   var todos = [{
-//     id: '111',
-//     text: 'anything',
-//     completed: false,
-//     completedAt: undefined,
-//     createdAt: 33000
-//   }];
-//   var action = {
-//     type: 'ADD_TODOS',
-//     todos
-//   };
-//   var res = actions.addTodos(todos);
-//
-//   expect(res).toEqual(action);
-// });
