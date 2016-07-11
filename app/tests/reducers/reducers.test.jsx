@@ -40,8 +40,9 @@ describe('Reducers',()=>{
       var action2 = {
         type: 'LOGOUT'
       };
-      var res = reducers.authReducer(df({uid:'abc'}), df(action2));
-      expect(res.uid.length).toEqual(0);
+
+      var res2 = reducers.authReducer(df({uid:'abc'}), df(action2));
+      expect(res2.uid.length).toEqual(0);
     });
   });
 
@@ -115,6 +116,24 @@ describe('Reducers',()=>{
       var res = reducers.todosReducer(df([]), df(action));
       expect(res.length).toEqual(1);
       expect(res[0]).toEqual(todos[0]);
+    });
+
+    it('should empty existing todos on LOGOUT', ()=>{
+      var todos = [{
+        id: '111',
+        text: 'anything',
+        completed: false,
+        completedAt: undefined,
+        createdAt: 33000
+      }];
+
+      var action = {
+        type:'LOGOUT',
+        todos: todos
+      };
+
+      var res = reducers.todosReducer(df([]), df(action));
+      expect(res.length).toEqual(0);
     });
   });
 

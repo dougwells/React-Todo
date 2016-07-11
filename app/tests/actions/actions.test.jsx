@@ -145,7 +145,7 @@ describe('Actions', ()=>{
       expect(res).toEqual(action);
     });
 
-    it('logout should generate logout action', (done)=>{
+    it('logout should clear uid', (done)=>{
       const store = createMockStore({auth: {uid: uid}});
       const action = actions.logout();
       store.dispatch(action).then(()=>{
